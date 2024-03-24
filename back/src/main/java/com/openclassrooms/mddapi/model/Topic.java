@@ -1,38 +1,40 @@
 package com.openclassrooms.mddapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+import java.util.List;
+
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 @Entity
 @Table(name = "topics")
 public class Topic {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "topic_id")
 	private Long id;
-	
-	@Column(nullable = false)
-	private String name;
 
-	public Long getId() {
-		return id;
-	}
+	@NotNull
+	@Size(max = 100)
+	private String title;
 
-	public void setId(Long id) {
-		this.id = id;
-	}
+	@NotNull
+	@Size(max = 500)
+	private String description;
 
-	public String getName() {
-		return name;
-	}
+	@ManyToMany(fetch = FetchType.EAGER)
+	@JoinTable(
+			name = "subscriptions",
+			joinColumns = @JoinColumn( name = "topic_id"),
+			inverseJoinColumns = @JoinColumn( name = "user_id") )
+	private List<User> users;
 
-	public void setName(String name) {
-		this.name = name;
-	}
-	
 }

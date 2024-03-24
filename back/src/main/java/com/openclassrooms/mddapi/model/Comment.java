@@ -1,29 +1,34 @@
 package com.openclassrooms.mddapi.model;
 
-import javax.persistence.Column;
-import javax.persistence.Entity;
-import javax.persistence.GeneratedValue;
-import javax.persistence.GenerationType;
-import javax.persistence.Id;
-import javax.persistence.Table;
+import jakarta.persistence.*;
+import jakarta.validation.constraints.NotNull;
+import jakarta.validation.constraints.Size;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Data;
+import lombok.NoArgsConstructor;
 
+@AllArgsConstructor
+@NoArgsConstructor
+@Data
+@Builder
 @Entity
 @Table(name = "comments")
 public class Comment {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
-	@Column(name = "comment_id")
 	private Long id;
-	
-	// TODO : to finish...
 
-	public Long getId() {
-		return id;
-	}
+	@NotNull
+	@Size(max = 300)
+	private String text;
 
-	public void setId(Long id) {
-		this.id = id;
-	}	
-	
+	@ManyToOne
+	@JoinColumn(name = "post_id", referencedColumnName = "id")
+	private Post post;
+
+	@OneToOne
+	@JoinColumn(name = "user_id", referencedColumnName = "id")
+	private User user;
 }
