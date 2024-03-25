@@ -1,16 +1,19 @@
 package com.openclassrooms.mddapi.controller;
 
-import java.util.List;
-
+import com.openclassrooms.mddapi.model.Topic;
+import com.openclassrooms.mddapi.model.TopicDto;
+import com.openclassrooms.mddapi.service.ITopicService;
+import org.springframework.http.ResponseEntity;
+import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.service.ITopicService;
+import java.util.List;
 
 @RestController
-@RequestMapping("/topic")
+@CrossOrigin(origins = "*", maxAge = 3600)
+@RequestMapping("api/topic")
 public class TopicController {
 	
 	private ITopicService topicService;
@@ -19,10 +22,15 @@ public class TopicController {
 		this.topicService = topicService;		
 	}
 
+
 	@GetMapping
-	public List<Topic> getTopics() {
-		return topicService.getTopics();
+	public ResponseEntity<?> getTopics() {
+
+		List<Topic> topics = topicService.getTopics();
+
+		List<TopicDto> topicsDto =  topics.stream().map(topic -> {
+			return new TopicDto(topic.getId(), topic.getTitle(), topic.getDescription());
+		}).toList();
+		return ResponseEntity.ok().body(topicsDto);
 	}
-	
-	
 }
