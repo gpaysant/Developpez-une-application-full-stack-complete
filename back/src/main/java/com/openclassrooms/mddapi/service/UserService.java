@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.exceptions.NotFoundException;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.repository.UserRepository;
@@ -53,5 +54,10 @@ public class UserService implements IUserService {
     @Override
     public User findById(Long id) {
         return this.userRepository.findById(id).orElse(null);
+    }
+
+    @Override
+    public User getUserByEmail(String email) {
+        return this.userRepository.findByEmail(email).orElseThrow(() -> new NotFoundException("user doesn't exist"));
     }
 }

@@ -42,4 +42,11 @@ public class Topic {
 			inverseJoinColumns = @JoinColumn( name = "user_id") )
 	private List<User> users;
 
+	public void addUser(User user) {
+		users.add(user);
+	}
+
+	public void removeUser(User user) {
+		users.remove(user);
+	}
 }

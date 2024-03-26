@@ -13,4 +13,6 @@ public interface IUserService {
     Optional<User> saveUser(UserDto userDto);
 
     User findById(Long id);
+
+    User getUserByEmail(String email);
 }
