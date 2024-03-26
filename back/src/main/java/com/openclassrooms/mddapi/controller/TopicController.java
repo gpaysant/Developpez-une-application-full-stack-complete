@@ -1,7 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.model.TopicDto;
+import com.openclassrooms.mddapi.dto.TopicDto;
 import com.openclassrooms.mddapi.service.ITopicService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
@@ -25,7 +25,6 @@ public class TopicController {
 
 	@GetMapping
 	public ResponseEntity<?> getTopics() {
-
 		List<Topic> topics = topicService.getTopics();
 
 		List<TopicDto> topicsDto =  topics.stream().map(topic -> {

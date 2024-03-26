@@ -8,4 +8,5 @@ public interface ITopicService {
 
 	List<Topic> getTopics();
 
+	Topic findById(Long id);
 }

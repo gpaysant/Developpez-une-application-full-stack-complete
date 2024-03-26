@@ -1,5 +1,7 @@
 package com.openclassrooms.mddapi.model;
 
+import com.fasterxml.jackson.annotation.JsonIdentityInfo;
+import com.fasterxml.jackson.annotation.ObjectIdGenerators;
 import jakarta.persistence.*;
 import jakarta.validation.constraints.NotNull;
 import jakarta.validation.constraints.Size;
@@ -15,6 +17,9 @@ import java.util.List;
 @Data
 @Builder
 @Entity
+@JsonIdentityInfo(
+		generator = ObjectIdGenerators.PropertyGenerator.class,
+		property = "id")
 @Table(name = "topics")
 public class Topic {
 
@@ -30,7 +35,7 @@ public class Topic {
 	@Size(max = 500)
 	private String description;
 
-	@ManyToMany(fetch = FetchType.EAGER)
+	@ManyToMany(fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "subscriptions",
 			joinColumns = @JoinColumn( name = "topic_id"),
