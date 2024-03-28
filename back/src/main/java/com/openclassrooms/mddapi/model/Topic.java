@@ -35,7 +35,7 @@ public class Topic {
 	@Size(max = 500)
 	private String description;
 
-	@ManyToMany(fetch = FetchType.LAZY)
+	@ManyToMany( fetch = FetchType.LAZY)
 	@JoinTable(
 			name = "subscriptions",
 			joinColumns = @JoinColumn( name = "topic_id"),
@@ -49,4 +49,5 @@ public class Topic {
 	public void removeUser(User user) {
 		users.remove(user);
 	}
+
 }

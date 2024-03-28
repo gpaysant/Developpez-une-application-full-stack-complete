@@ -8,11 +8,17 @@ import lombok.NoArgsConstructor;
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
-public class CommentDto {
+public class PostCreationRequest {
 
-    private Long id;
     @NotNull
-    private String text;
-    private PostDto postDto;
-    private UserDto userDto;
+    private String title;
+
+    @NotNull
+    private String content;
+
+    @NotNull
+    private Long topicId;
+
+    @NotNull
+    private Long userId;
 }
