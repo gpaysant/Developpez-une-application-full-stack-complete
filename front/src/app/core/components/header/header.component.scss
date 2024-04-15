@@ -1,0 +1,159 @@
+.center-content {
+    display: flex;
+    justify-content: center;
+    height: 100vh;
+    .link {
+        border: 1px solid black !important;
+    }
+    
+}
+
+.buttons {
+    display: flex;
+    justify-content: space-around;
+}
+
+.image1 {
+    height: auto; 
+    max-width: 100%;
+    transform: scale(0.9);
+}
+
+// for small screen
+@media (max-width: 767px) {
+    .buttons {
+        height: 100px;
+        display: flex;
+        flex-direction: column;
+        justify-content: space-around;
+        align-items: center;
+    }
+     button {
+         width: 150px;
+         height: 30px;
+     }
+}
+
+.toolbar {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    img {
+        width: 100px;
+    }
+}
+
+.arrow {
+    width: 50px;
+    margin: 30px;
+    cursor: pointer;
+}
+
+// for small screen (login/register)
+@media (max-width: 767px) {
+
+    .logoLoginRegister  {
+        height: auto; 
+        max-width: 100%;
+        transform: scale(0.9);
+    }
+
+    .app_not_logged {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+        align-items: center;
+    }
+
+    .arrow {
+        width: 40px;
+        padding-left: 30px;
+    }
+    .arrowAtLeft {
+        display: flex;
+        width: 100%;
+    }
+
+
+
+}
+
+.toolbarMain {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 100%;
+    img {
+        width: 130px;
+    }
+    .menu_right {
+        width: 100%;
+        display: flex;
+        flex-direction: row;
+        justify-content: flex-end;
+        color: black;
+    }
+    .link {
+        border-width: 0 !important; 
+        text-decoration: none !important;
+        margin-right: 30px;
+        color: black;
+    }
+    .active {
+        color: purple;
+    }
+    #imageWhite, #imagePurple {
+        width: 50px;
+    }
+    button {
+        color: black;
+    }
+}
+
+.mat-toolbar.mat-primary {
+    background: white;
+}
+
+.mat-toolbar {
+    border-bottom: 2px solid black !important;
+}
+
+
+// for small screen (others pages - post/topic/me)
+@media (max-width: 767px) {
+    .profilMatItem {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-end;
+        height: 100%;
+        .mdc-list-item {
+            height: fit-content;
+        }
+        .link {
+            text-decoration: none !important;
+            border-width: 0 !important; 
+        }
+        .imageToRight {
+            display: flex !important;
+            flex-direction: row !important;
+            justify-content: flex-end !important;
+        }
+    }
+
+    mat-side-nav {
+        .mat-drawer-inner-container {
+            display: none !important;
+        }
+    }
+
+    mat-nav-list {
+        display: flex ;
+        flex-direction: column ;
+        height: 98% ;
+
+        img {
+            width: 40px;
+        }
+    }
+
+}

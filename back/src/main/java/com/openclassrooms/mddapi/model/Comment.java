@@ -28,7 +28,7 @@ public class Comment {
 	@JoinColumn(name = "post_id", referencedColumnName = "id")
 	private Post post;
 
-	@OneToOne
+	@ManyToOne
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
 }

@@ -35,12 +35,13 @@ public class Post {
 	@NotNull
 	@Size(max = 3000)
 	private String content;
-	
-	@ManyToOne
+
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "topic_id", referencedColumnName = "id")
 	private Topic topic;
 
-	@OneToOne
+	@ManyToOne(fetch = FetchType.LAZY)
 	@JoinColumn(name = "user_id", referencedColumnName = "id")
 	private User user;
+
 }
