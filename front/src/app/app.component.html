@@ -1,1 +1,8 @@
-<app-topic></app-topic>
+
+<ng-container *ngIf="!isUserLoggedIn && (isConnectingHome$ | async) as isConnectedHome; else islogged">
+  <app-header [isUserLoggedIn]="isUserLoggedIn" [isConnectingHome]="isConnectedHome"></app-header>
+</ng-container>
+<ng-template #islogged let-isConnectedHome="isConnectedHome">
+  <app-header [isUserLoggedIn]="isUserLoggedIn" [isConnectingHome]="isConnectedHome"></app-header>
+  <router-outlet></router-outlet>
+</ng-template>

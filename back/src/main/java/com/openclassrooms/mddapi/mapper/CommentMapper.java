@@ -22,7 +22,7 @@ public interface CommentMapper extends EntityMapper<CommentDto, Comment> {
 
     @Mappings({
             @Mapping(target = "userDto" ,expression = "java(comment.getUser() != null ? new UserDto(comment.getUser().getId(), comment.getUser().getUsername(), comment.getUser().getEmail(), null) : null)"),
-            @Mapping(target = "postDto", expression = "java(comment.getPost() != null ? new PostDto(comment.getPost().getId(), comment.getPost().getTitle(), comment.getPost().getDateCreation(), comment.getPost().getContent(), null, null, null) : null)")
+            @Mapping(target = "postDto", expression = "java(comment.getPost() != null ? new PostDto(comment.getPost().getId(), comment.getPost().getTitle(), comment.getPost().getDateCreation(), comment.getPost().getContent(), null, null) : null)")
     })
     public abstract CommentDto toDto(Comment comment);
 }

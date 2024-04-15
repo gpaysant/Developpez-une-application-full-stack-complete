@@ -1,0 +1,100 @@
+<div class="app">
+    <div  *ngIf="isUserLoggedIn; else notLogged">
+
+      <ng-container *ngIf="!isSmallScreen; else smallScreenSideNav">
+        <mat-toolbar color="primary">
+          <mat-toolbar-row  class="onToolBarMain">
+            <div class="toolbarMain">
+              <div>
+              <img src="../../../../assets/logo_p6.png">
+            </div>
+              <div class="menu_right">
+                <a [routerLink]="['/post']" routerLinkActive="active" class="link"> Articles</a>
+                <a [routerLink]="['/topic']" routerLinkActive="active" class="link" > Thèmes</a>
+              </div>
+              <div>
+                  <a [routerLink]="['/user']" class="link" [class.active]="isMeActive()">
+                    <img [hidden]="!isMeActive()" src="../../../../assets/profil_purple.png" id="imagePurple">
+                    <img [hidden]="isMeActive()" src="../../../../assets/profil_white.png" id="imageWhite">
+                  </a>
+              </div>
+            </div>
+            
+          </mat-toolbar-row>
+        </mat-toolbar>
+      </ng-container>
+      
+        <ng-template #smallScreenSideNav >
+      
+          <mat-toolbar color="primary">
+            <mat-toolbar-row  class="onToolBarMain">
+              <div class="toolbarMain">
+                <div>
+                <img src="../../../../assets/logo_p6.png">
+              </div>
+                <div class="menu_right">
+                  <div>
+                  <button mat-icon-button (click)="snav.toggle()"><mat-icon>menu</mat-icon></button>
+                  </div>
+              </div>
+              </div>
+            </mat-toolbar-row>
+          </mat-toolbar>
+      
+          <mat-sidenav-container class="example-sidenav-container"
+                                  [style.marginTop.px]="2">
+              <mat-sidenav #snav [mode]="'over'"
+                          [fixedInViewport]="true" position="end" > 
+                <mat-nav-list>
+                    <div class="topicPostMatItem">
+                      <a mat-list-item [routerLink]="['/post']" routerLinkActive="active" class="link" (click)="snav.toggle()"> Articles</a>
+                      <a mat-list-item [routerLink]="['/topic']" routerLinkActive="active" class="link" (click)="snav.toggle()"> Thèmes</a>
+                    </div>
+                    <div class="profilMatItem">
+                      <a mat-list-item [routerLink]="['/user']" class="link" [class.active]="isMeActive()" (click)="snav.toggle()">
+                        <div class="imageToRight">
+                          <img [hidden]="!isMeActive()" src="../../../../assets/profil_purple.png" id="imagePurple">
+                          <img [hidden]="isMeActive()" src="../../../../assets/profil_white.png" id="imageWhite">
+                        </div>
+                      </a>
+                  </div>
+                  </mat-nav-list>
+              </mat-sidenav>
+            </mat-sidenav-container>
+          </ng-template>
+        <div>
+        </div>
+    </div>
+    <ng-template #notLogged class="app_not_logged">
+        <div *ngIf="isConnectingHome else notConnectHome" >
+          <div class="center-content">
+            <div class="home">
+                <img src="../assets/logo_p6.png" class="image1">
+                <div class="buttons"  [ngClass]="{'stacked-buttons': isSmallScreen}">
+                    <button mat-raised-button color="white" routerLink="login" (click)="leaveHome()" class="link">Se connecter</button>
+                    <button mat-raised-button color="white" routerLink="register" (click)="leaveHome()" class="link">S'inscrire</button>
+                </div>
+            </div>
+          </div>
+        </div>
+        <ng-template #notConnectHome >
+          <ng-container *ngIf="!isSmallScreen; else smallScreen">
+            <mat-toolbar >
+              <mat-toolbar-row color="primary" class="onToolBarLoginRegister">
+                <div class="toolbar">
+                  <img src="../../../../assets/logo_p6.png">
+                </div>
+              </mat-toolbar-row>
+            </mat-toolbar>
+            <img src="../../../../assets/arrow_left.png" class="arrow" (click)="back()">
+            </ng-container>
+            <ng-template #smallScreen >
+              <div class="arrowAtLeft">
+              <img src="../../../../assets/arrow_left.png" class="arrow" (click)="back()">
+              </div>
+              <img src="../../../../assets/logo_p6.png" class="logoLoginRegister">
+            </ng-template>
+        </ng-template>  
+
+    </ng-template>  
+  </div>

@@ -7,7 +7,6 @@ import lombok.NoArgsConstructor;
 import org.springframework.data.annotation.CreatedDate;
 
 import java.time.LocalDateTime;
-import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -23,5 +22,4 @@ public class PostDto {
     private String content;
     private TopicDto topicDto;
     private UserDto userDto;
-    private List<CommentDto> comments;
 }

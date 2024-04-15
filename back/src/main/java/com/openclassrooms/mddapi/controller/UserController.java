@@ -1,6 +1,6 @@
 package com.openclassrooms.mddapi.controller;
 
-import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.dto.UserUpdatingDto;
 import com.openclassrooms.mddapi.mapper.UserMapper;
 import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.service.UserService;
@@ -8,6 +8,8 @@ import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
+
+import java.security.Principal;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
@@ -40,19 +42,21 @@ public class UserController {
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<?> updateUser(@PathVariable("id") String id, @Valid @RequestBody UserDto userDto, BindingResult bindingResult) {
+    public ResponseEntity<?> updateUser(@PathVariable("id") String id, @Valid @RequestBody UserUpdatingDto userUpdatingDto, BindingResult bindingResult) {
         try {
-            User user = this.userService.findById(Long.valueOf(id));
-
-            if (user == null) {
-                return ResponseEntity.notFound().build();
-            }
-
-            this.userService.saveUser(userDto);
-            return ResponseEntity.ok("Mis à jour avec succès");
+            this.userService.updateUser(id, userUpdatingDto);
+            return ResponseEntity.ok().build();
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
         }
+    }
+
+    @GetMapping("/me")
+    public ResponseEntity<?> getUser(Principal authentication) {
+        User user = this.userService.getUserByEmail(authentication.getName());
+
+        return ResponseEntity.ok().body(this.userMapper.toDto(user));
+
     }
 
 }

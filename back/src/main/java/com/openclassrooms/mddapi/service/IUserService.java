@@ -1,6 +1,7 @@
 package com.openclassrooms.mddapi.service;
 
 import com.openclassrooms.mddapi.dto.UserDto;
+import com.openclassrooms.mddapi.dto.UserUpdatingDto;
 import com.openclassrooms.mddapi.model.User;
 
 import java.util.Optional;
@@ -15,4 +16,6 @@ public interface IUserService {
     User findById(Long id);
 
     User getUserByEmail(String email);
+
+    Optional<User> updateUser(String idUser, UserUpdatingDto userUpdatingDto);
 }

@@ -1,53 +1,47 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.CommentCreationDto;
-import com.openclassrooms.mddapi.mapper.CommentMapper;
-import com.openclassrooms.mddapi.model.Comment;
-import com.openclassrooms.mddapi.model.Post;
-import com.openclassrooms.mddapi.model.User;
+import com.openclassrooms.mddapi.dto.CommentSendingDto;
 import com.openclassrooms.mddapi.service.ICommentService;
-import com.openclassrooms.mddapi.service.IPostService;
-import com.openclassrooms.mddapi.service.IUserService;
 import jakarta.validation.Valid;
 import org.springframework.http.ResponseEntity;
 import org.springframework.validation.BindingResult;
 import org.springframework.web.bind.annotation.*;
 
 import java.security.Principal;
+import java.util.List;
 
 @RestController
 @CrossOrigin(origins = "*", maxAge = 3600)
 @RequestMapping("api/comment")
 public class CommentController {
 
-    private ICommentService commentService;
-    private final CommentMapper commentMapper;
-    private final IUserService userService;
-    private final IPostService postService;
+    private final ICommentService commentService;
 
-    public CommentController(ICommentService commentService, CommentMapper commentMapper, IUserService userService, IPostService postService) {
+
+    public CommentController(ICommentService commentService) {
         this.commentService = commentService;
-        this.commentMapper = commentMapper;
-        this.userService = userService;
-        this.postService = postService;
     }
 
 
-    @PostMapping("/add/")
+    @PostMapping("/add")
     public ResponseEntity<?> addComment(Principal authentication, @Valid @RequestBody CommentCreationDto commentCreationDto, BindingResult bindingResult) {
         try {
-            User user = this.userService.getUserByEmail(authentication.getName());
-            Post post = this.postService.findById(commentCreationDto.getPostId());
-            Comment comment = Comment.builder()
-                .text(commentCreationDto.getText())
-                .post(post)
-                .user(user)
-                .build();
-            this.commentService.addComment(comment);
-
-            return ResponseEntity.ok().body("Commentaire ajoute avec succes");
+            this.commentService.addComment(authentication.getName(), commentCreationDto);
+            return ResponseEntity.ok().build();
         } catch (NumberFormatException e) {
             return ResponseEntity.badRequest().build();
         }
     }
+
+    @GetMapping("/{id}")
+    public ResponseEntity<?> getComment(@PathVariable("id") String id) {
+        try {
+            List<CommentSendingDto> commentSendingDtoList = this.commentService.getCommentsByPost(Long.valueOf(id));
+            return ResponseEntity.ok().body(commentSendingDtoList);
+        } catch (NumberFormatException e) {
+            return ResponseEntity.badRequest().build();
+        }
+    }
+
 }

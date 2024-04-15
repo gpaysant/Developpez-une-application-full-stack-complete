@@ -1,11 +1,15 @@
 package com.openclassrooms.mddapi.service;
 
+import com.openclassrooms.mddapi.dto.CommentCreationDto;
+import com.openclassrooms.mddapi.dto.CommentSendingDto;
 import com.openclassrooms.mddapi.model.Comment;
 
 import java.util.List;
 
 public interface ICommentService {
-    List<Comment> getCommentsByPost(Long idPost);
+    List<CommentSendingDto> getCommentsByPost(Long idPost);
 
-    void addComment(Comment comment);
+    List<Comment> getComments(Long idPost);
+
+    void addComment(String name, CommentCreationDto commentCreationDto);
 }

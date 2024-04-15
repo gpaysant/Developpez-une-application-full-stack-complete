@@ -1,7 +1,8 @@
 package com.openclassrooms.mddapi.service;
 
-import com.openclassrooms.mddapi.dto.PostCreationRequest;
+import com.openclassrooms.mddapi.dto.PostCreationRequestDto;
 import com.openclassrooms.mddapi.dto.PostDto;
+import com.openclassrooms.mddapi.dto.PostSimpleDto;
 import com.openclassrooms.mddapi.model.Post;
 import com.openclassrooms.mddapi.model.User;
 
@@ -11,9 +12,13 @@ public interface IPostService {
 
     Post findById(Long id);
 
-    PostDto convertToDto(PostCreationRequest postCreationRequest);
+    PostSimpleDto getPost(String idPost);
 
-    void addPost(Post post);
+    PostDto convertToDto(String name, PostCreationRequestDto postCreationRequest);
+
+    void addPost(String email, PostCreationRequestDto postCreationRequestDto);
 
     List<Post> findByUser(User user);
+
+    List<PostSimpleDto> getPostsOf(String email);
 }

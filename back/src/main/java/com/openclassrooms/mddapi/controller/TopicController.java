@@ -1,10 +1,7 @@
 package com.openclassrooms.mddapi.controller;
 
 import com.openclassrooms.mddapi.dto.TopicDto;
-import com.openclassrooms.mddapi.model.Topic;
-import com.openclassrooms.mddapi.model.User;
 import com.openclassrooms.mddapi.service.ITopicService;
-import com.openclassrooms.mddapi.service.IUserService;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
@@ -17,30 +14,25 @@ import java.util.List;
 public class TopicController {
 	
 	private ITopicService topicService;
-	private IUserService userService;
 	
-	public TopicController(ITopicService topicService, IUserService userService) {
+	public TopicController(ITopicService topicService) {
 		this.topicService = topicService;
-		this.userService = userService;
 	}
 
 
 	@GetMapping
 	public ResponseEntity<?> getTopics() {
-		List<Topic> topics = topicService.getTopics();
+		List<TopicDto> topicsDto = this.topicService.getAllTopics();
 
-		List<TopicDto> topicsDto =  topics.stream().map(topic -> {
-			return new TopicDto(topic.getId(), topic.getTitle(), topic.getDescription(), null);
-		}).toList();
 		return ResponseEntity.ok().body(topicsDto);
 	}
 
 	@PostMapping("/subscribe/{id}")
 	public ResponseEntity<?> subscribeTopic(@PathVariable("id") String id, Principal authentication) {
 		try {
-			User user = this.userService.getUserByEmail(authentication.getName());
-			this.topicService.addUserOnTopic(Long.valueOf(id), user);
-			return ResponseEntity.ok("Abonné au topic");
+			this.topicService.addUserOnTopic(Long.valueOf(id), authentication.getName());
+
+			return ResponseEntity.ok().build();
 		} catch (NumberFormatException e) {
 			return ResponseEntity.badRequest().build();
 		}
@@ -49,13 +41,19 @@ public class TopicController {
 	@PostMapping("/unsubscribe/{id}")
 	public ResponseEntity<?> unsubscribeTopic(@PathVariable("id") String id, Principal authentication) {
 		try {
-			User user = this.userService.getUserByEmail(authentication.getName());
-			this.topicService.removeUserOnTopic(Long.valueOf(id), user);
+			this.topicService.removeUserOnTopic(Long.valueOf(id), authentication.getName());
 
-			return ResponseEntity.ok("Désabonné du topic");
+			return ResponseEntity.ok().build();
 		} catch (NumberFormatException e) {
 			return ResponseEntity.badRequest().build();
 		}
+	}
+
+	@GetMapping("/subscribed")
+	public ResponseEntity<?> getTopics(Principal authentication) {
+		List<TopicDto> topicsDto = topicService.findTopicsOfSubscriber(authentication.getName());
+
+		return ResponseEntity.ok().body(topicsDto);
 	}
 
 }

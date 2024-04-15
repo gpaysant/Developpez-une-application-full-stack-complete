@@ -1,0 +1,131 @@
+.container {
+    display: flex;
+    margin-right: 50px;
+    margin-top: 30px;
+}
+.mat-mdc-card {
+    box-shadow: none !important;
+    margin-bottom: 30px;
+}
+
+.detail {
+    margin-top: 10px;
+    margin-left: 10px;
+}
+
+.item {
+    .mat-mdc-card-header {
+        padding: 0px 0px !important;
+    }
+    
+    .mat-mdc-card-content {
+        padding: 0px 0px 30px !important;
+    }
+    gap: 20px;
+    text-decoration: none !important;
+
+    mat-card-header {
+        display: flex;
+        flex-direction: column;
+        justify-content: flex-start;
+    }
+
+    mat-card-content {
+        border-bottom: 1px solid black !important;
+    }
+
+    .subtitle {
+        display: flex;
+        width: 50%;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+    
+}
+
+.commentCard {
+    display: flex;
+    flex-direction: row;
+    margin-top: 20px;
+    mat-card-title {
+        font-size: 14px;
+        font-weight: lighter;
+    }
+
+    .mat-mdc-card-content {
+        padding: 16px 16px  !important;
+        width: 70%;
+        background-color: rgba(128,128,128, 0.2);
+        border-radius: 3%;
+    }
+
+    .mat-mdc-card-header {
+        padding: 16px 16px !important;
+        width: 10%;
+    }
+}
+
+.block_write_comment {
+    display: flex;
+    flex-direction: row;
+}
+
+.icon-display {
+    transform: scale(2.5);
+    color: rgba(66, 3, 58, 0.87); 
+ }
+
+ mat-form-field {
+    width:88%;
+    padding: 16px 16px !important;
+
+ }
+
+
+ // for small screen
+@media (max-width: 767px) {
+    .subtitle {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 50%;
+        justify-content: space-between;
+        margin-top: 30px;
+    }
+
+    .commentCard {
+        display: flex;
+        flex-direction: column-reverse;
+        align-items: flex-end;
+        margin-top: 10px;
+
+        .mat-mdc-card-content {
+            padding: 10px 10px  !important;
+            width: 90%;
+            background-color: rgba(128,128,128, 0.2);
+            border-radius: 3%;
+        }
+        .mat-mdc-card-header {
+            padding: 16px 16px !important;
+            width: 30%;
+            display: flex;
+            align-items: flex-end;
+        }
+        .mat-mdc-form-field {
+            #mat-input-0 {
+            width: 10% !important;
+            }
+        }
+    }
+
+    .icon-display-inside {
+        transform: scale(2);
+        color: rgba(66, 3, 58, 0.87); 
+    }
+
+    .mat-mdc-card {
+        box-shadow: none !important;
+        margin-bottom: 10px;
+    }
+    
+}

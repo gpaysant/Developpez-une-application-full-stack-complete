@@ -1,0 +1,18 @@
+<div class="container">
+    <mat-card class="item" *ngFor="let topic of (topicsWithSubscription$ | async)">
+        <mat-card-header>
+          <mat-card-title>{{ topic.title }}</mat-card-title>
+        </mat-card-header>
+        <mat-card-content>
+          <p>{{ topic.description }}</p>
+        </mat-card-content>
+        <mat-card-actions>
+          <button *ngIf="!topic.subscribed" mat-raised-button color="primary" (click)="subscribeTopic(topic.id)">
+              <span class="ml1">S'abonner</span>
+          </button>
+          <button *ngIf="topic.subscribed" mat-raised-button color="warn" disabled="true">
+              <span class="ml1">Déjà abonné</span>
+          </button>
+        </mat-card-actions>
+      </mat-card>
+    </div>

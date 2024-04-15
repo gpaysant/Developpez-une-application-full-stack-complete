@@ -19,7 +19,6 @@ describe('AppComponent', () => {
   it(`should have as title 'mdd-client'`, () => {
     const fixture = TestBed.createComponent(AppComponent);
     const app = fixture.componentInstance;
-    //expect(app.title).toEqual('mdd-client');
   });
 
   it('should render title', () => {

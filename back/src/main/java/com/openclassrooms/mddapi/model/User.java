@@ -13,6 +13,8 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
+import java.util.Objects;
+
 @AllArgsConstructor
 @NoArgsConstructor
 @Data
@@ -45,5 +47,25 @@ public class User {
     @Size(max = 255)
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
+
+    @Override
+    public boolean equals(Object obj) {
+
+        // same instance
+        if (obj == this) {
+            return true;
+        }
+        // null
+        if (obj == null) {
+            return false;
+        }
+        // type
+        if (!getClass().equals(obj.getClass())) {
+            return false;
+        }
+        // cast and compare state
+        User other = (User) obj;
+        return Objects.equals(email, other.email);
+    }
 
 }
