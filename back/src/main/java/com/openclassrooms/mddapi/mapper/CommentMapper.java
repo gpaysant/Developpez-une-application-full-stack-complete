@@ -16,10 +16,19 @@ import java.util.Collections;
 import java.util.Optional;
 import java.util.stream.Collectors;
 
+/**
+ * Custom CommentMapper to create expected mapping
+ */
 @Component
 @Mapper(componentModel = "spring", imports = {Arrays.class, Collectors.class, Post.class, User.class, Comment.class, Collections.class, Optional.class, PostDto.class, UserDto.class})
 public interface CommentMapper extends EntityMapper<CommentDto, Comment> {
 
+    /**
+     * This method create a mapper between Post and PostDto.
+     * This custom method is created to avoid cyclic relation between post, topic and user.
+     * @param comment
+     * @return CommentDto
+     */
     @Mappings({
             @Mapping(target = "userDto" ,expression = "java(comment.getUser() != null ? new UserDto(comment.getUser().getId(), comment.getUser().getUsername(), comment.getUser().getEmail(), null) : null)"),
             @Mapping(target = "postDto", expression = "java(comment.getPost() != null ? new PostDto(comment.getPost().getId(), comment.getPost().getTitle(), comment.getPost().getDateCreation(), comment.getPost().getContent(), null, null) : null)")

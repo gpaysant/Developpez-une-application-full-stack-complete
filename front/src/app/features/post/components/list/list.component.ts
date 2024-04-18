@@ -21,6 +21,14 @@ export class ListComponent {
     this.sortPostsByDate();
   }
 
+  /**
+   * @ngdoc method
+   * @name sortPostsByDate
+   * 
+   * Sort by date if isSortedByDate equals true, else not sorted.
+   * 
+   * @return void 
+   */
   sortPostsByDate(): void {
     this.isSortedByDate = !this.isSortedByDate;
     this.posts$.subscribe(posts => {
