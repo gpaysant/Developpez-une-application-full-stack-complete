@@ -1,7 +1,9 @@
 
+<!--Display home without router-outlet (if user not login and not in auth page)-->
 <ng-container *ngIf="!isUserLoggedIn && (isConnectingHome$ | async) as isConnectedHome; else islogged">
   <app-header [isUserLoggedIn]="isUserLoggedIn" [isConnectingHome]="isConnectedHome"></app-header>
 </ng-container>
+<!--Display auth page (or other page when user connected)-->
 <ng-template #islogged let-isConnectedHome="isConnectedHome">
   <app-header [isUserLoggedIn]="isUserLoggedIn" [isConnectingHome]="isConnectedHome"></app-header>
   <router-outlet></router-outlet>

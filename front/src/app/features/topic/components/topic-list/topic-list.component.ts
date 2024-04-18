@@ -22,6 +22,16 @@ ngOnInit() {
   this.fetchTopic();
 }
 
+/**
+ * @ngdoc method
+ * @name TopicListComponent#fetchTopic
+ * 
+ * This method combine two observable to create in another one.
+ * And convert a expected result for using it in html.
+ * 
+ * @return void 
+ * 
+ */
 public fetchTopic() {
   this.topicsWithSubscription$ = combineLatest([this.topics$, this.topicSubscribed$]).pipe(
     map(([topics, subscribedTopics]) => {

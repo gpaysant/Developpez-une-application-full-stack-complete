@@ -48,6 +48,7 @@ public class User {
     @JsonProperty(access = JsonProperty.Access.WRITE_ONLY)
     private String password;
 
+    // Need to implement this method because we check equality of email.
     @Override
     public boolean equals(Object obj) {
 

@@ -7,6 +7,10 @@ import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
 import org.springframework.web.bind.annotation.ResponseStatus;
 
+
+/**
+ * Exception handling with spring for "Not Found"
+ */
 @ControllerAdvice
 public class NotFoundExceptionHandler {
 
