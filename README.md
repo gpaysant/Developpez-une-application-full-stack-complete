@@ -1,25 +1,95 @@
-# P6-Full-Stack-reseau-dev
+# MDD App
+With this application, the users can subscribe to topic and participate to posts.
 
-## Front
+This contains front-end and back-end development.
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 14.1.3.
+The purpose of this application is to create full stack development.
 
-Don't forget to install your node_modules before starting (`npm install`).
+The main framework and languages are :
+- Java
+- Spring (boot, security, data JPA)
+- Angular
+- Typescript
 
-### Development server
+## Getting Started
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+### Prerequisites
+* Maven
+* Java 21
+* Angular 17
+* NodeJS 20
+* MySQL
 
-### Build
+## Install Database 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
+1. Create Database
+  ```sh
+  CREATE DATABASE mdd;
+  ```
+2. Run script SQL 
 
-### Where to start
+No need to run script, when you will run api (folder back), the sql will be execute automatically.  
 
-As you may have seen if you already started the app, a simple home page containing a logo, a title and a button is available. If you take a look at its code (in the `home.component.html`) you will see that an external UI library is already configured in the project.
+4. Configure informations for your database in applications.properties
+ 
+  Update your environment variable and port of your server.
+  ```sh
+  spring.datasource.url=jdbc:mysql://localhost:3306/mdd?serverTimezone=UTC
+  spring.datasource.username=${DB_USERNAME}
+  spring.datasource.password=${DB_PASSWORD}
+  spring.datasource.driver-class-name=com.mysql.cj.jdbc.Driver
+  
+  spring.jpa.properties.hibernate.dialect=org.hibernate.dialect.MySQLDialect
+  spring.jpa.properties.hibernate.format_sql=true
+  spring.jpa.show-sql=true
+  spring.jpa.hibernate.ddl-auto=create
+  spring.jpa.defer-datasource-initialization=true
+  spring.sql.init.mode=always
+  
+  server.port=9000
+  ```
 
-This library is `@angular/material`, it's one of the most famous in the angular ecosystem. As you can see on their docs (https://material.angular.io/), it contains a lot of highly customizable components that will help you design your interfaces quickly.
+## Install the project
 
-Note: I recommend to use material however it's not mandatory, if you prefer you can get ride of it.
+1. Angular application("front" folder)
+* Install NPM packages
+  ```sh
+  npm install
+  ```
+ 
+* Builds and serves application
+  ```sh
+  ng serve
+  ```
 
-Good luck!
+2. API Application("back" folder)
+* Install all dependencies and create jar executable :
+  ```sh
+  Run ./mvnw clean install
+  ```
+
+* Run API project :
+  ```sh
+  java -jar mdd-api-1.0.0.jar
+  ```
+
+## Usage
+
+1. Navigate to : http://localhost:4200/. The main page shows login/register by default.
+
+2. After you login/register , you could subscribe to topic and access to posts.
+
+   The mobile version is available as well.
+
+
+## Language/Framework
+* Mysql/Java/Lombok/Spring boot/Spring Security(JWT authentication)/MapStruct/Spring data JPA
+* Angular/Angular Material/Typescript
+* Postman
+
+<!-- CONTACT -->
+## Contact
+
+Paysant Gérald - geraldpaysant@gmail.com
+
+Project Link : [https://github.com/gpaysant/Developpez-une-application-full-stack-complete](https://github.com/gpaysant/Developpez-une-application-full-stack-complete)
